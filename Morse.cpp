@@ -1,221 +1,67 @@
+// Morse Code Converter
 #include <iostream>
 #include <string>
 using namespace std;
-
-string charToMorse(char16_t letter)
-{
-    switch(letter)
-    {
-        case 'a': case 'A':
-        return ".-"; break;
-        case 'b': case 'B':
-        return "-..."; break;
-        case 'c': case 'C':
-        return "-.-."; break;
-        case 'd': case 'D':
-        return "-.."; break;
-        case 'e': case 'E':
-        return "."; break;
-        case 'f': case 'F':
-        return "..-."; break;
-        case 'g': case 'G':
-        return "--."; break;
-        case 'h': case 'H':
-        return "...."; break;
-        case 'i': case 'I':
-        return ".."; break;
-        case 'j': case 'J':
-        return ".---"; break;
-        case 'k': case 'K':
-        return "-.-"; break;
-        case 'l': case 'L':
-        return ".-.."; break;
-        case 'm': case 'M':
-        return "--"; break;
-        case 'n': case 'N':
-        return "-."; break;
-        case 'o': case 'O':
-        return "---"; break;
-        case 'p': case 'P':
-        return ".--."; break;
-        case 'q': case 'Q':
-        return "--.-"; break;
-        case 'r': case 'R':
-        return ".-."; break;
-        case 's': case 'S':
-        return "..."; break;
-        case 't': case 'T':
-        return "-"; break;
-        case 'u': case 'U':
-        return "..-"; break;
-        case 'v': case 'V':
-        return "...-"; break;
-        case 'w': case 'W':
-        return ".--"; break;
-        case 'x': case 'X':
-        return "-..-"; break;
-        case 'y': case 'Y':
-        return "-.--"; break;
-        case 'z': case 'Z':
-        return "--.."; break;
-        case 'ą': case 'Ą':
-        return ".-.-"; break;
-        case 'ć': case 'Ć':
-        return "-.-.."; break;
-        case 'ę': case 'Ę':
-        return "..-.."; break;
-        case 'ł': case 'Ł':
-        return ".-..-"; break;
-        case 'ń': case 'Ń':
-        return "--.--"; break;
-        case 'ó': case 'Ó':
-        return "---."; break;
-        case 'ś': case 'Ś':
-        return "...-..."; break;
-        case 'ż': case 'Ż':
-        return "--..-."; break;
-        case 'ź': case 'Ź':
-        return "--..-"; break;
-        default:
-        return " "; break;
-    }
-}
-string morseToChar(string morse)
-{
-
-        if(morse == ".-")
-        {return "a";}
-        else if(morse == "-...")
-        {return "b";}
-        else if(morse == "-.-.")
-        {return "c";}
-        else if(morse == "-..")
-        {return "d";}
-        else if(morse == ".")
-        {return "e";}
-        else if(morse == "..-.")
-        {return "f";}
-        else if(morse == "--.")
-        {return "g";}
-        else if(morse == "....")
-        {return "h";}
-        else if(morse == "..")
-        {return "i";}
-        else if(morse == ".---")
-        {return "j";}
-        else if(morse == "-.-")
-        {return "k";}
-        else if(morse == ".-..")
-        {return "l";}
-        else if(morse == "--")
-        {return "m";}
-        else if(morse == "-.")
-        {return "n";}
-        else if(morse == "---")
-        {return "o";}
-        else if(morse == ".--.")
-        {return "p";}
-        else if(morse == "--.-")
-        {return "q";}
-        else if(morse == ".-.")
-        {return "r";}
-        else if(morse == "...")
-        {return "s";}
-        else if(morse == "-")
-        {return "t";}
-        else if(morse == "..-")
-        {return "u";}
-        else if(morse == "...-")
-        {return "v";}
-        else if(morse == ".--")
-        {return "w";}
-        else if(morse == "-..-")
-        {return "x";}
-        else if(morse == "-.--")
-        {return "y";}
-        else if(morse == "--..")
-        {return "z";}
-        else if(morse == ".-.-")
-        {return "ą";}
-        else if(morse == "-.-..")
-        {return "ć";}
-        else if(morse == "..-..")
-        {return "ę";}
-        else if(morse == ".-..-")
-        {return "ł";}
-        else if(morse == "--.--")
-        {return "ń";}
-        else if(morse == "---.")
-        {return "ó";}
-        else if(morse == "...-...")
-        {return "ś";}
-        else if(morse == "--..-.")
-        {return "ż";}
-        else if(morse == "--..-")
-        {return "ź";}
-        else{return " ";}
-}
-//-.. .- .-- .. -..
+ 
+// Prototypes
+string toMorse(char);
+ 
+// Global data. Each valid character and its equivalent
+// morse code are stored in the parallel arrays.
+const int NUM_CHARS = 40;
+char regular[NUM_CHARS] = { ' ', ',', '.', '?', '0', '1', '2', '3', '4', '5', 
+                            '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 
+                            'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 
+                            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+                          };
+ 
+string morse[NUM_CHARS] = { " ", "--..--" , ".-.-.-" , "..--.." ,
+                            "-----", ".----", "..---", "...--",
+                            "....-", ".....", "-....", "--...",
+                            "---..", "----.", ".-", "-...",
+                            "-.-.", "-..", ".", "..-.",
+                            "--.", "....", "..", ".---",
+                            "-.-", ".-..", "--", "-.",
+                            "---", ".--.", "--.-", ".-.",
+                            "...", "-", "..-", "...-",
+                            ".--", "-..-", "-.--", "--.."
+                          };
+ 
 int main()
 {
-    cout << "Morse Code Converter" << endl;
-    char key;
-    bool loop = true;
-    while(loop)
+    string str;        // To hold the user's input
+ 
+    // Get a word from the user.
+    cout << "Enter a word and I will translate it to Morse code.\n";
+    cout << "-> ";
+    getline(cin, str);
+ 
+    // Translate each character and display it.
+    int index = 0;
+    while (index < str.size())
     {
-        bool toMorse=true;
-        string input;
-        string output = "";
-        int node = 0;
-        string sub;
-        cout << "Type a word or morse code(using - and .): " << endl;
-        getline(cin, input);
-        if(input[1]=='.' || input[1]=='-')
-        {
-            toMorse=false;
-        }
-        else
-        {
-            toMorse=true;
-        }
-        if(toMorse)
-        {
-            for(int i=0;i<input.length();i++)
-            {
-                if(i!=0)
-                {
-                    output+=" ";
-                }
-                output = output + charToMorse(input[i]);
-            }
-        }
-        else{
-            for(int i = 0;i<=input.length();i++)
-            {
-                if(input[i]==' ')
-                {
-                    sub = input.substr(node,i-node);
-                    output+=morseToChar(sub);
-                    node = i+1;
-                }
-                if(i==input.length()-1)
-                {
-                    sub = input.substr(node,i+1-node);
-                    output+=morseToChar(sub);
-                    node = i+1;
-                }
-            }
-        }
-        cout << output << endl;
-        cout << "Press r to restart or any key to exit" << endl;
-        cin >> key;
-        if(key!='r')
-        {
-            loop=false;
-        }
-        cin.clear();
-        cin.ignore();
-        cout << endl << endl;
+        
+        cout << toMorse(toupper(str[index++]))<<" ";
+       
     }
-    
+ 
+    return 0;
+}
+ 
+// The toMorse function accepts a char argument and
+// returns a string containing the morse code
+// for that character.
+ 
+string toMorse(char ch)
+{
+    // Find the character in the array.
+    int index = 0;
+    while (index < NUM_CHARS && ch != regular[index]) { index++; } string morseValue; 
+    // To hold the morse code 
+    if (index >= NUM_CHARS)
+        morseValue = "UNDEFINED";  // ch was not found
+    else
+        morseValue = morse[index]; // Get the morse code
+ 
+    return morseValue;
 }
