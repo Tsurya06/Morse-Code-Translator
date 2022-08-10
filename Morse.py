@@ -118,4 +118,4 @@ class MorseCodeTranslator:
             translation += " ".join(w)
             translation += "   "
 
-        return translation.rstrip()
+        return translation.rstrip() 
