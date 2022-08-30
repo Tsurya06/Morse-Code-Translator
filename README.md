@@ -1,5 +1,4 @@
 # Morse-Code-Translator
-Morse Code Translator
 Morse code is a code where each letter of the English alphabet, each digit, and various
 punctuation characters are represented by a series of dots and dashes. 
 
